@@ -1,7 +1,7 @@
 export const BASENAME = ''; // don't add '/' at end off BASENAME
 export const BASE_URL = '/app/dashboard/default';
 export const BASE_TITLE = ' | Diplo DevOps Example App ';
-export const API_SERVER = 'http://localhost:8000/api/';
+export const API_SERVER = process.env.REACT_APP_API_SERVER || 'http://localhost:8000/api/';
 
 export const CONFIG = {
     layout: 'vertical', // disable on free version
