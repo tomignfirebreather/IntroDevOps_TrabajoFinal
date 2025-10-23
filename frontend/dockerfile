@@ -1,37 +1,29 @@
 # Dockerfile (producción, multi-stage)
 # Stage 1: build
 FROM node:20-alpine AS build
+
 WORKDIR /app
 
-# Copiar package* y lock para aprovechar cache de capas
 COPY package*.json ./
-# Si usas pnpm o yarn ajusta el comando
+
 RUN npm ci --silent
 
-# Copiar el resto del código
 COPY . .
 
-# Si tu build produce "build" (CRA) o "dist" (Vite/Angular), ajusta el comando:
-# Para CRA: npm run build -> output en /app/build
-# Para Vite / Vue / Angular: npm run build -> output en /app/dist
 ARG BUILD_CMD="npm run build"
 RUN ${BUILD_CMD}
 
 # Stage 2: serve with nginx
 FROM nginx:stable-alpine AS runtime
 
-# Remove default config and add our own (opcional)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copiar los archivos estáticos del build
-# Ajusta "build" o "dist" según tu proyecto:
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Exponer el puerto 80
 EXPOSE 80
 
-# Healthcheck (opcional)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
-  CMD wget -qO- --timeout=2 http://localhost/ || exit 1
+  CMD curl -f http://localhost/ || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]
