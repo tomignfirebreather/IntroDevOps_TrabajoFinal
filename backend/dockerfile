@@ -8,7 +8,7 @@ WORKDIR /app
 # instalar dependencias del sistema necesarias para psycopg2 y builds
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-    build-essential gcc libpq-dev curl \
+    build-essential gcc libpq-dev postgresql-client curl \
  && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
