@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-config
+  namespace: dev
+data:
+  SQL_ENGINE: "django.db.backends.postgresql"
+  SQL_DATABASE: "devdb"
+  SQL_HOST: "postgres"
+  SQL_PORT: "5432"
+  DEBUG: "0"
+  DJANGO_ALLOWED_HOSTS: "*"

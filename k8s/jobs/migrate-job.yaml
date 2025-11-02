@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate-job
+  namespace: dev
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+        - name: migrate
+          image: backend:stage03
+          imagePullPolicy: Never
+          envFrom:
+            - secretRef:
+                name: dev-secrets
+            - configMapRef:
+                name: dev-config
+          command: [ "sh", "-c", "python manage.py migrate --noinput && python manage.py showmigrations" ]
+      restartPolicy: OnFailure
