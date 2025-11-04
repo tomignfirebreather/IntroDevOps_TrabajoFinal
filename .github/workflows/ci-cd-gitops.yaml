@@ -7,7 +7,6 @@ on:
       - 'frontend/**'
     branches:
       - main
-      - ci-test
 
 env:
   GITOPS_REPO: tomignfirebreather/IntroDevOps_GitOps
