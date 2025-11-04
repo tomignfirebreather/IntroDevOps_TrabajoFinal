@@ -7,9 +7,10 @@ on:
       - 'frontend/**'
     branches:
       - main
+      - ci-test
 
 env:
-  GITOPS_REPO: tomignfirebreather/IntroDevOps_GitOps.git
+  GITOPS_REPO: tomignfirebreather/IntroDevOps_GitOps
   GITOPS_BRANCH: main
   GITOPS_PATH: overlays/dev
 
@@ -39,7 +40,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./backend
-          file: ./backend/Dockerfile
+          file: ./backend/dockerfile
           push: true
           tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/backend:${{ github.sha }}
       - name: Set backend image tag output
@@ -52,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
-          file: ./frontend/Dockerfile
+          file: ./frontend/dockerfile
           push: true
           tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }}
       - name: Set frontend image tag output
@@ -84,7 +85,7 @@ jobs:
       # Update images in kustomization
       # -----------------------
       - name: Update images in kustomization
-        working-directory: gitops/$GITOPS_PATH
+        working-directory: gitops/${{ env.GITOPS_PATH }}
         run: |
           kustomize edit set image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/backend=${BACKEND_IMAGE}
           kustomize edit set image docker.io/${{ secrets.DOCKERHUB_USERNAME }}/frontend=${FRONTEND_IMAGE}
