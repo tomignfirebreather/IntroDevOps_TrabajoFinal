@@ -2,6 +2,10 @@
 # wait-for-db.sh host port -- cmd...
 set -e
 
+#!/usr/bin/env bash
+# wait-for-db.sh host port -- cmd...
+set -e
+
 host="$1"
 port="$2"
 shift 2

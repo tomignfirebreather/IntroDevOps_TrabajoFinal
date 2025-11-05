@@ -18,6 +18,9 @@ RUN pip install --upgrade pip setuptools wheel \
 
 COPY . .
 
+# Asegurar que el script wait-for-db sea ejecutable dentro de la imagen
+RUN if [ -f ./wait-for-db.sh ]; then chmod +x ./wait-for-db.sh; fi
+
 # Crear directorios para archivos estáticos y media
 RUN mkdir -p /vol/static /vol/media
 
