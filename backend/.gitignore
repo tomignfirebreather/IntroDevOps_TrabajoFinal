@@ -28,6 +28,7 @@ ENV/
 # Distribution / packaging
 build/
 dist/
+pgdata/
 *.egg-info/
 .eggs/
 *.whl
