@@ -10,4 +10,5 @@ Dockerfile
 docker-compose.yml
 db.sqlite3
 media/
+pgdata/
 staticfiles/
