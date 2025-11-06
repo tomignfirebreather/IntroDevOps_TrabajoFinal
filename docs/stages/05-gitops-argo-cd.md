@@ -62,12 +62,19 @@ IntroDevOps_GitOps/
 │ ├── backend-deployment.yaml
 │ ├── frontend-deployment.yaml
 │ ├── postgres-deployment.yaml
+│ ├── backend-service.yaml
+│ ├── frontend-service.yaml
+│ ├── postgres-pvc.yaml
+│ ├── ingress.yaml
 │ ├── namespace.yaml
+│ ├── configmapyaml
+│ ├── secrets-sealed.yaml
+│ ├── kustomization.yaml
+│ ├── migrate-job.yaml
 │
 └── overlays/
 └── dev/
 ├── kustomization.yaml
-├── patches/
 
 
 ---
