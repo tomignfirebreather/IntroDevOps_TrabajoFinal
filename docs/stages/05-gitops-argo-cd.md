@@ -62,13 +62,12 @@ IntroDevOps_GitOps/
 │ ├── backend-deployment.yaml
 │ ├── frontend-deployment.yaml
 │ ├── postgres-deployment.yaml
-│ ├── ...
+│ ├── namespace.yaml
 │
 └── overlays/
 └── dev/
 ├── kustomization.yaml
 ├── patches/
-└── namespace.yaml
 
 
 ---
